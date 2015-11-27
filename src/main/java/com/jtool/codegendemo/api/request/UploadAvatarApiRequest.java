@@ -8,7 +8,7 @@ import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-public class UploadAvatarRequest {
+public class UploadAvatarApiRequest {
 
     @NotNull
     @Size(min = 1, max = 100)

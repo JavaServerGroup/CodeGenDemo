@@ -2,9 +2,9 @@ package com.jtool.codegendemo.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.jtool.codegendemo.api.request.SearchUserApiRequest;
-import com.jtool.codegendemo.api.request.UploadAvatarRequest;
+import com.jtool.codegendemo.api.request.UploadAvatarApiRequest;
 import com.jtool.codegendemo.api.response.SearchUserApiResponse;
-import com.jtool.codegendemo.api.response.UploadAvatarResponse;
+import com.jtool.codegendemo.api.response.UploadAvatarApiResponse;
 import com.jtool.test.AbstractControllerTest;
 import org.junit.Assert;
 import org.junit.Test;
@@ -21,8 +21,8 @@ public class ControllerTest extends AbstractControllerTest {
 	@Test
 	public void testSearchUser() throws Exception {
 		SearchUserApiRequest searchUserApiRequest = new SearchUserApiRequest();
-		searchUserApiRequest.setIsMarried(true);
-		searchUserApiRequest.setCountry("China");
+		searchUserApiRequest.setIsMarried("1");
+		searchUserApiRequest.setCountry("中国");
 		searchUserApiRequest.setAge(30);
 		searchUserApiRequest.setHeight(1.87);
 
@@ -40,16 +40,16 @@ public class ControllerTest extends AbstractControllerTest {
 
 		Assert.assertEquals(urls, searchUserApiResponse.getUrls());
 
-		Assert.assertEquals(new Double(1.56), searchUserApiResponse.getUsers().get(0).getHeight());
+		Assert.assertEquals(new Double(1.87), searchUserApiResponse.getUsers().get(0).getHeight());
 		Assert.assertEquals("用户1", searchUserApiResponse.getUsers().get(0).getName());
 		Assert.assertEquals(new Integer(30), searchUserApiResponse.getUsers().get(0).getAge());
-		Assert.assertEquals("China", searchUserApiResponse.getUsers().get(0).getCountry());
+		Assert.assertEquals("中国", searchUserApiResponse.getUsers().get(0).getCountry());
 		Assert.assertEquals(true, searchUserApiResponse.getUsers().get(0).getIsMarried());
 
-		Assert.assertEquals(new Double(1.70), searchUserApiResponse.getUsers().get(1).getHeight());
+		Assert.assertEquals(new Double(1.87), searchUserApiResponse.getUsers().get(1).getHeight());
 		Assert.assertEquals("用户2", searchUserApiResponse.getUsers().get(1).getName());
-		Assert.assertEquals(new Integer(36), searchUserApiResponse.getUsers().get(1).getAge());
-		Assert.assertEquals("China", searchUserApiResponse.getUsers().get(1).getCountry());
+		Assert.assertEquals(new Integer(30), searchUserApiResponse.getUsers().get(1).getAge());
+		Assert.assertEquals("中国", searchUserApiResponse.getUsers().get(1).getCountry());
 		Assert.assertEquals(false, searchUserApiResponse.getUsers().get(1).getIsMarried());
 	}
 
@@ -57,14 +57,14 @@ public class ControllerTest extends AbstractControllerTest {
 	public void testUploadAvatar() throws Exception {
 		MockMultipartFile jpgFile = Utils.makeMockMultipartFile("file", "/media/j.jpg");
 
-		UploadAvatarRequest uploadAvatarRequest = new UploadAvatarRequest();
+		UploadAvatarApiRequest uploadAvatarRequest = new UploadAvatarApiRequest();
 		uploadAvatarRequest.setFile(jpgFile);
 		uploadAvatarRequest.setMd5("xxxxxxxxxxxx");
 		uploadAvatarRequest.setSeq(1);
 
 		String uploadAvatarRequestStr = requestContentStringByPost("/uploadAvatar", uploadAvatarRequest);
 
-		UploadAvatarResponse uploadAvatarResponse = JSON.parseObject(uploadAvatarRequestStr, UploadAvatarResponse.class);
+		UploadAvatarApiResponse uploadAvatarResponse = JSON.parseObject(uploadAvatarRequestStr, UploadAvatarApiResponse.class);
 
 		Assert.assertEquals("0", uploadAvatarResponse.getCode());
 		Assert.assertEquals(Base64.getEncoder().encodeToString(jpgFile.getBytes()), uploadAvatarResponse.getFileContent());

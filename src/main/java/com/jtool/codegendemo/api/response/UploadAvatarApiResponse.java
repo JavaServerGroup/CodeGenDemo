@@ -4,7 +4,7 @@ import com.jtool.codegenannotation.CodeGenField;
 
 import javax.validation.constraints.NotNull;
 
-public class UploadAvatarResponse {
+public class UploadAvatarApiResponse {
 
     @NotNull
     @CodeGenField("状态码, 0：完成")
@@ -12,6 +12,13 @@ public class UploadAvatarResponse {
 
     @CodeGenField("文件base64")
     private String fileContent;
+
+    @NotNull
+    @CodeGenField("文件md5")
+    private String md5;
+
+    @NotNull
+    private Integer seq;
 
     public String getCode() {
         return code;
@@ -27,6 +34,22 @@ public class UploadAvatarResponse {
 
     public void setFileContent(String fileContent) {
         this.fileContent = fileContent;
+    }
+
+    public String getMd5() {
+        return md5;
+    }
+
+    public void setMd5(String md5) {
+        this.md5 = md5;
+    }
+
+    public Integer getSeq() {
+        return seq;
+    }
+
+    public void setSeq(Integer seq) {
+        this.seq = seq;
     }
 
     @Override
