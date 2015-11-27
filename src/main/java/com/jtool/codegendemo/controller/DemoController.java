@@ -22,6 +22,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.io.*;
 import java.util.*;
 
+/*
+<logicInfo>这是一个逻辑说明，只要在代码用特殊标签把文字围起来，就可以自动生成逻辑的备忘说明</logicInfo>
+ */
 @Controller
 public class DemoController {
 
