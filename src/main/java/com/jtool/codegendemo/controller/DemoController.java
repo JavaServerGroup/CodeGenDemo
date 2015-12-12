@@ -43,7 +43,7 @@ public class DemoController {
         log.debug("请求参数是否合法：" + !ParamBeanValidator.isNotValid(searchUserApiRequest));
 
         if(ParamBeanValidator.isNotValid(searchUserApiRequest)) {
-            return "{\"code\":0}";
+            throw new ParamException();
         }
 
         Pages pages = new Pages();
@@ -95,7 +95,7 @@ public class DemoController {
         log.debug("请求参数是否合法：" + !ParamBeanValidator.isNotValid(uploadAvatarRequest));
 
         if(ParamBeanValidator.isNotValid(uploadAvatarRequest)) {
-            return "{\"code\":0}";
+            throw new ParamException();
         }
 
         UploadAvatarApiResponse uploadAvatarResponse = new UploadAvatarApiResponse();
